@@ -27,7 +27,7 @@ Traditional pill boxes do not provide:
 
 ## Solution
 
-Our system integrates:
+The system integrates:
 
 - Scheduled reminder system
 - Secure authentication (PIN-based access)
