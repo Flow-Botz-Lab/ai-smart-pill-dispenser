@@ -1,8 +1,13 @@
-# AI Smart Pill Dispenser (Cloud-Managed IoT System)
+# AI Smart Pill Dispenser (Cloud-Managed IoT System) 🧸💊
 
-## Project Overview
+FlowBotz Lab Project  
+AI-powered, 3D-printed, cloud-managed medication dispenser designed for safety, reliability, and intelligent reminders.
 
-The AI Smart Pill Dispenser is a secure, child-proof, cloud-managed medication system designed to:
+---
+
+# Project Overview
+
+The **AI Smart Pill Dispenser** is a secure, child-proof medication system designed to:
 
 - Remind users when it is time to take medication
 - Dispense medication only during scheduled time windows
@@ -11,166 +16,254 @@ The AI Smart Pill Dispenser is a secure, child-proof, cloud-managed medication s
 - Upload logs securely to a cloud database
 - Use AI to predict missed doses and improve reminders
 
-This project demonstrates the integration of embedded systems, cloud infrastructure, and artificial intelligence in a healthcare-focused IoT device.
+This project demonstrates the integration of:
+
+- Embedded Systems
+- Robotics
+- Artificial Intelligence
+- Cloud Infrastructure
+- IoT Device Engineering
 
 ---
 
-## Problem Statement
+# System Architecture
 
-Medication non-adherence can lead to severe health risks.  
-Traditional pill organizers lack:
+![Architecture Diagram](docs/diagrams/system_architecture.png)
 
-- Security
-- User authentication
-- Controlled dispensing
-- Cloud tracking
-- Predictive intelligence
+The system consists of several interacting components:
 
-Our system addresses these limitations with secure hardware design and cloud-managed logging.
+### Authentication
+Users must authenticate before medication is dispensed.
 
----
+Options include:
 
-## System Architecture
-
-Raspberry Pi Device (Edge Layer)  
-↓  
-Secure HTTPS Communication  
-↓  
-Cloud API (FastAPI on Render)  
-↓  
-Cloud Database (Supabase PostgreSQL)  
-↓  
-Remote Monitoring Dashboard  
+- Face Recognition
+- QR Code Authentication
+- PIN Code
 
 ---
 
-## Core Features
+### Dispensing Mechanism
 
-### Local Device Features
-- Scheduled medication reminders
-- Time-restricted dispensing window
-- PIN-based authentication
-- Child-proof locking design
-- Local activity logging
+The dispenser uses a **rotating pill carousel** controlled by a **stepper motor**.
 
-### Cloud Features
-- Secure API endpoint
-- Centralized medication logs
-- Remote monitoring capability
-- Scalable database storage
-- AI data aggregation
+Sequence:
 
----
+1. AI reminder triggers medication time
+2. User authenticates
+3. Carousel rotates to the correct compartment
+4. Servo gate opens
+5. Pills drop through the chute
+6. IR sensor confirms successful dispense
 
-## Security Design
+Components:
 
-To ensure child-proof and secure operation:
-
-- Locked medication housing
-- Dispensing only within scheduled time window
-- PIN-based user authentication
-- Lockout after failed attempts
-- HTTPS encrypted communication
-- API key authentication between device and cloud
+- 8-slot pill carousel
+- NEMA 17 stepper motor
+- MG90S servo gate
+- IR break beam sensor
+- Hall effect sensor (position detection)
 
 ---
 
-## AI Component
+### Embedded System
 
-A supervised learning model predicts the probability of a missed dose based on:
+The device is powered by:
 
-- Time of day
-- Day of week
-- Previous missed doses
-- User response time patterns
+- Raspberry Pi 5
+- A4988 Stepper Driver
+- 18650 Battery Pack
+- TP4056 Charging Module
 
-If risk exceeds a threshold, the system escalates reminders.
+The Raspberry Pi handles:
 
----
-
-## Development Workflow
-
-This project follows a professional software engineering process:
-
-1. Development in VS Code
-2. Version control with Git
-3. Repository hosted on GitHub
-4. Feature branching for team collaboration
-5. Deployment of cloud backend on Render
-6. Cloud database hosted on Supabase
-7. Raspberry Pi clones repository for device execution
+- Motor control
+- Sensor monitoring
+- Touchscreen UI
+- Cloud communication
+- AI inference
 
 ---
 
-## Project Structure
+### User Interface
 
-ai-smart-pill-dispenser/
+Users interact with the system using a **touchscreen on the bear’s chest**.
+
+Features:
+
+- Medication reminder screen
+- Confirm / Snooze buttons
+- Status alerts
+- Smart reminder adjustments
+
+Audio reminders are delivered through a **mini speaker inside the bear head**.
+
+---
+
+### Cloud & AI Backend
+
+The system connects to a cloud backend for:
+
+- Medication logs
+- Remote caregiver alerts
+- AI prediction models
+
+Technologies used:
+
+- FastAPI backend
+- Cloud database
+- Edge AI models running on device
+
+---
+
+# Hardware Components
+
+### Core System
+
+- Raspberry Pi 5
+- 3.5" Touchscreen Display
+- NeoPixel LED Ring
+- Camera Module
+- Mini Speaker
+
+---
+
+### Dispensing Hardware
+
+- NEMA 17 Stepper Motor
+- A4988 Stepper Driver
+- MG90S Servo Motor
+- IR Break Beam Sensor
+- Hall Effect Sensor
+
+---
+
+### Power System
+
+- 18650 Lithium Batteries
+- TP4056 Charging Module
+- 5V Buck Converter
+
+---
+
+### Mechanical Components
+
+- 3D Printed Bear Shell
+- Pill Carousel
+- Selector Plate
+- Servo Dispensing Gate
+- Pill Delivery Chute
+- Removable Pill Cup
+
+All structural components are designed for **3D printing**.
+
+---
+
+# Bear-Shaped Enclosure Design 🧸
+
+The device is designed as a friendly **bear-shaped robot** to make medication reminders more approachable.
+
+### Bear Head
+
+Contains:
+
+- Camera
+- LED status lights
+- Speaker
+
+---
+
+### Bear Chest
+
+Contains:
+
+- Touchscreen display
+- User interface
+
+---
+
+### Bear Belly
+
+Contains:
+
+- Pill dispensing mechanism
+- Carousel system
+- Servo gate
+- Sensors
+
+---
+
+### Rear Panel
+
+Removable access panel for:
+
+- Raspberry Pi
+- Battery
+- Wiring
+
+---
+
+# Repository Structure
+
+
+ai-smart-pill-dispenser
+│
+├── docs
+│ ├── diagrams
+│ │ └── system_architecture.png
+│ └── blueprints
+│
+├── ai
+├── cloud
+├── firmware
+├── hardware
+├── ui
 │
 ├── README.md
-├── requirements.txt
-├── src/                     # Device-side code
-│   ├── main.py
-│   ├── scheduler.py
-│   ├── auth.py
-│   ├── dispenser.py
-│   ├── logger.py
-│   └── ai_model.py
-│
-├── backend/                 # Cloud API
-│   ├── main.py
-│   └── requirements.txt
-│
-└── data/
-    └── medication_log.csv
+├── LICENSE
+└── .gitignore
+
 
 ---
 
-## Technologies Used
+# Development Roadmap
 
-- Python
-- Raspberry Pi 5
-- GPIO
-- FastAPI
-- Supabase (PostgreSQL)
-- Render (Cloud Hosting)
-- scikit-learn
-- Git & GitHub
+### Phase 1 — Mechanical Prototype
+- Design carousel system
+- 3D print components
+- Test motor control
 
----
+### Phase 2 — Embedded Control
+- Stepper motor indexing
+- Servo gate operation
+- Sensor integration
 
-## Deployment Overview
+### Phase 3 — User Interface
+- Touchscreen UI
+- Reminder alerts
+- Confirm / Snooze functionality
 
-### Cloud Backend Deployment
-Hosted on Render using:
-- FastAPI application
-- Environment variables for API keys
-- Secure HTTPS endpoint
+### Phase 4 — Cloud Integration
+- Log upload
+- Caregiver notifications
+- Dashboard
 
-### Device Deployment
-Raspberry Pi clones the repository:
-
-git clone https://github.com/your-repo-link.git
-cd ai-smart-pill-dispenser
-python src/main.py
+### Phase 5 — AI Integration
+- Missed dose prediction
+- Smart reminder optimization
 
 ---
 
-## Future Improvements
+# Safety Disclaimer
 
-- Facial recognition authentication
-- Mobile app integration
-- Caregiver SMS alerts
-- HIPAA-compliant cloud storage
-- Over-the-air firmware updates
+This project is a **student engineering prototype** and is not intended to replace professional medical devices.
+
+Always follow medication instructions from a licensed healthcare provider.
 
 ---
 
-## Academic Purpose
+# License
 
-This project demonstrates:
+MIT License
 
-- Embedded system design
-- IoT cloud architecture
-- Secure device-to-cloud communication
-- AI integration in healthcare systems
-- Real-world software development workflow
+
